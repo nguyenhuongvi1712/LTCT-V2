@@ -32,6 +32,11 @@ const routes = [
         component: () => import('@/views/reports/revenue/Revenue.vue'),
       },
       {
+        path: '/report/store',
+        name: 'Store',
+        component: () => import('@/views/reports/store/ListBill.vue'),
+      },
+      {
         path: '/base',
         name: 'Base',
         component: {
@@ -198,19 +203,20 @@ const routes = [
         component: () => import('@/views/charts/Charts.vue'),
       },
       {
-        path: '/icons',
-        name: 'Icons',
+        path: '/products',
+        name: 'Products',
         component: {
           render() {
             return h(resolveComponent('router-view'))
           },
         },
-        redirect: '/icons/coreui-icons',
+        redirect: '/products/list',
         children: [
           {
-            path: '/icons/coreui-icons',
-            name: 'CoreUI Icons',
-            component: () => import('@/views/icons/CoreUIIcons.vue'),
+            path: '/products/list',
+            name: 'List Product',
+            component: () =>
+              import('@/views/management/products/ProductList.vue'),
           },
           {
             path: '/icons/brands',
