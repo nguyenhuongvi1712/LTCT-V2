@@ -219,9 +219,10 @@ const routes = [
               import('@/views/management/products/ProductList.vue'),
           },
           {
-            path: '/icons/brands',
-            name: 'Brands',
-            component: () => import('@/views/icons/Brands.vue'),
+            path: '/products/create',
+            name: 'Create new product',
+            component: () =>
+              import('@/views/management/products/CreateProduct.vue'),
           },
           {
             path: '/icons/flags',
