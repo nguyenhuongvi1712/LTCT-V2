@@ -8,8 +8,17 @@ const routes = [
     path: '/',
     name: 'Home',
     component: DefaultLayout,
-    redirect: '/report',
+    redirect: '/dashboard',
     children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+          import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
+      },
       {
         path: '/report',
         name: 'Report',
@@ -306,6 +315,16 @@ const router = createRouter({
     // always scroll to top
     return { top: 0 }
   },
+})
+
+router.beforeEach((to, from, next) => {
+  // chuyển đến trang login nếu chưa được login
+  // const publicPages = ['pages/login', 'pages/register']
+  // const authRequired = !publicPages.includes(to.path)
+  const loggedIn = localStorage.getItem('isAuthenticated')
+  if (to.name !== 'Login' && to.name !== 'Register' && !loggedIn) {
+    return next({ name: 'Login' })
+  } else next()
 })
 
 export default router
