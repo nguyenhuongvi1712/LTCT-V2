@@ -248,6 +248,77 @@ const routes = [
         ],
       },
       {
+        path: '/users',
+        name: 'Users',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/users/customers',
+        children: [
+          {
+            path: '/users/customers',
+            name: 'List Customers',
+            component: () => import('@/views/management/users/UsersList.vue'),
+          },
+          {
+            path: '/products/create',
+            name: 'Create new product',
+            component: () =>
+              import('@/views/management/products/CreateProduct.vue'),
+          },
+          {
+            path: '/products/:id',
+            name: 'Edit Product',
+            component: () =>
+              import('@/views/management/products/EditProduct.vue'),
+          },
+          {
+            path: '/products/categories',
+            name: 'Manage Categories',
+            component: () =>
+              import('@/views/management/products/Categories.vue'),
+          },
+        ],
+      },
+      {
+        path: '/promotions',
+        name: 'Promotions',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/promotions/list',
+        children: [
+          {
+            path: '/promotions/list',
+            name: 'List Promotions',
+            component: () =>
+              import('@/views/management/promotions/PromotionsList.vue'),
+          },
+          {
+            path: '/products/create',
+            name: 'Create new product',
+            component: () =>
+              import('@/views/management/products/CreateProduct.vue'),
+          },
+          {
+            path: '/products/:id',
+            name: 'Edit Product',
+            component: () =>
+              import('@/views/management/products/EditProduct.vue'),
+          },
+          {
+            path: '/products/categories',
+            name: 'Manage Categories',
+            component: () =>
+              import('@/views/management/products/Categories.vue'),
+          },
+        ],
+      },
+      {
         path: '/notifications',
         name: 'Notifications',
         component: {

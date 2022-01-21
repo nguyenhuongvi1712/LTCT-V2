@@ -21,7 +21,8 @@ const authStore = {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
     },
-    login(state, user, token) {
+    login(state, req) {
+      const { user, token } = req
       if (user.role === 'admin') {
         state.isAuthenticated = true
         state.user = { ...user }

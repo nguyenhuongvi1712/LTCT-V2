@@ -45,7 +45,7 @@
 <script>
 import ChartDoughnutPromotion from './ChartDoughnutPromotion.vue'
 import ChartBarPro from './CharBarPromotion.vue'
-import { getPromotion } from '../../../api/promotion/index'
+import { getPromotion } from '../../../api/promotions/index'
 import faker from 'faker'
 
 import { sumSimpleArray, unique } from '../../../utils'

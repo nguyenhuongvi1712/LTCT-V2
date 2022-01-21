@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <div
+    class="bg-light min-vh-100 d-flex flex-row align-items-center"
+    v-loading="loading"
+  >
     <CContainer>
       <CRow class="justify-content-center">
         <CCol :md="8">
@@ -99,7 +102,7 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
-import { login } from '@/api/user-sp14'
+import { login } from '@/api/users'
 export default {
   name: 'Login',
   setup() {
@@ -109,6 +112,7 @@ export default {
     return {
       username: '',
       password: '',
+      loading: false,
     }
   },
   validations() {
@@ -123,11 +127,16 @@ export default {
       if (!isValid) {
         return
       } else {
+        this.loading = true
         const res = await login(this.username, this.password)
+        this.loading = false
         if (res.status === 200) {
           const user = res.data
           if (user.role === 'admin') {
-            this.$store.commit('authStore/login', user, res.token)
+            this.$store.commit('authStore/login', {
+              user,
+              token: res.token,
+            })
             this.$router.replace({ path: '/' })
           } else {
             this.$message.error("Oops, you don't have permission!")
