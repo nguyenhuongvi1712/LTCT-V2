@@ -3,6 +3,7 @@
     style="width: 100%"
     height="660px"
     stripe
+    v-loading="loading"
     :data="
       products.filter(
         (e) =>
@@ -65,15 +66,13 @@ import {
 } from '@/api/products'
 export default {
   methods: {
-    handleClick() {
-      console.log('click')
+    handleEdit(index, row) {
+      this.$router.push('/products/' + row.id)
     },
     filterCategory(value, row) {
       return row.category === value
     },
     deleteConfirm(index, row) {
-      console.log('index', index)
-      console.log('row', row)
       this.$confirm(
         'This will permanently delete this product. Continue?',
         'Warning',
@@ -84,14 +83,18 @@ export default {
         },
       )
         .then(async () => {
+          this.loading = true
           await deleteProduct(row.id)
-          row.splice(index, 1)
+          const idx = this.products.findIndex((e) => e.id === row.id)
+          this.products.splice(idx, 1)
+          this.loading = false
           this.$message({
             type: 'success',
             message: 'Delete completed',
           })
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err)
           return
         })
     },
@@ -102,6 +105,7 @@ export default {
       search: '',
       categories: [],
       filterListCategory: [],
+      loading: true,
     }
   },
   async mounted() {
@@ -110,7 +114,7 @@ export default {
     this.products = res.map((e) => {
       return {
         ...e,
-        category: filtersCategory(this.categories, e.id)?.name,
+        category: filtersCategory(this.categories, e.category_id)?.name,
       }
     })
     this.filterListCategory = this.categories.map((e) => {
@@ -119,6 +123,7 @@ export default {
         value: e.name,
       }
     })
+    this.loading = false
   },
 }
 </script>

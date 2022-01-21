@@ -234,9 +234,16 @@ const routes = [
               import('@/views/management/products/CreateProduct.vue'),
           },
           {
-            path: '/icons/flags',
-            name: 'Flags',
-            component: () => import('@/views/icons/Flags.vue'),
+            path: '/products/:id',
+            name: 'Edit Product',
+            component: () =>
+              import('@/views/management/products/EditProduct.vue'),
+          },
+          {
+            path: '/products/categories',
+            name: 'Manage Categories',
+            component: () =>
+              import('@/views/management/products/Categories.vue'),
           },
         ],
       },

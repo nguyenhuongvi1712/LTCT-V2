@@ -37,6 +37,24 @@
         </div>
       </div>
     </div>
+    <div class="mb-3 form-group" :class="{ error: v$.quantity.$errors.length }">
+      <CFormLabel for="quantity">Product's quantity</CFormLabel>
+      <CFormInput
+        type="number"
+        id="quantity"
+        placeholder="50"
+        v-model.trim="v$.quantity.$model"
+      />
+      <div
+        class="input-errors mt-3 mb-3"
+        v-for="error of v$.quantity.$errors"
+        :key="error.$uid"
+      >
+        <div class="error-msg text-danger">
+          {{ error.$message }}
+        </div>
+      </div>
+    </div>
     <div class="mb-3 form-group" :class="{ error: v$.brand.$errors.length }">
       <CFormLabel for="brand">Product's brand</CFormLabel>
       <CFormInput
@@ -133,6 +151,7 @@ export default {
       category_id: { required, numeric },
       detail: { required },
       image: { required },
+      quantity: { required, numeric },
     }
   },
   data() {
@@ -143,6 +162,7 @@ export default {
       category_id: '',
       detail: '',
       image: '',
+      quantity: null,
       option: ['Open this select menu'],
     }
   },
@@ -156,17 +176,18 @@ export default {
         detail: this.detail,
         image: this.image,
         brand: this.brand,
-        category: this.category_id,
+        category_id: parseInt(this.category_id),
+        quantity: parseInt(this.quantity),
       }
       const res = await createNewProduct(req)
-      if (res.success === true) {
+      if (res.success_code === true) {
         this.$message({
           message: 'Product created successfully.',
           type: 'success',
         })
         this.$router.push('/products/list')
       } else {
-        this.$message.error('Oops! ' + res.message)
+        this.$message.error('Oops! Something was wrong!')
       }
     },
   },

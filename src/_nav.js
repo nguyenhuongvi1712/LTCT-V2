@@ -59,8 +59,8 @@ export default [
       },
       {
         component: 'CNavItem',
-        name: 'Create new category',
-        to: '/products/categories/create',
+        name: 'Categories',
+        to: '/products/categories/',
       },
       //     {
       //       component: 'CNavItem',
