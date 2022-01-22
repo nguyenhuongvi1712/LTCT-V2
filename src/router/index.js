@@ -8,8 +8,17 @@ const routes = [
     path: '/',
     name: 'Home',
     component: DefaultLayout,
-    redirect: '/report',
+    redirect: '/dashboard',
     children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+          import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
+      },
       {
         path: '/report',
         name: 'Report',
@@ -30,6 +39,11 @@ const routes = [
         path: '/report/revenue',
         name: 'Revenue',
         component: () => import('@/views/reports/revenue/Revenue.vue'),
+      },
+      {
+        path: '/report/store',
+        name: 'Store',
+        component: () => import('@/views/reports/store/ListBill.vue'),
       },
       {
         path: '/base',
@@ -198,29 +212,109 @@ const routes = [
         component: () => import('@/views/charts/Charts.vue'),
       },
       {
-        path: '/icons',
-        name: 'Icons',
+        path: '/products',
+        name: 'Products',
         component: {
           render() {
             return h(resolveComponent('router-view'))
           },
         },
-        redirect: '/icons/coreui-icons',
+        redirect: '/products/list',
         children: [
           {
-            path: '/icons/coreui-icons',
-            name: 'CoreUI Icons',
-            component: () => import('@/views/icons/CoreUIIcons.vue'),
+            path: '/products/list',
+            name: 'List Product',
+            component: () =>
+              import('@/views/management/products/ProductList.vue'),
           },
           {
-            path: '/icons/brands',
-            name: 'Brands',
-            component: () => import('@/views/icons/Brands.vue'),
+            path: '/products/create',
+            name: 'Create new product',
+            component: () =>
+              import('@/views/management/products/CreateProduct.vue'),
           },
           {
-            path: '/icons/flags',
-            name: 'Flags',
-            component: () => import('@/views/icons/Flags.vue'),
+            path: '/products/:id',
+            name: 'Edit Product',
+            component: () =>
+              import('@/views/management/products/EditProduct.vue'),
+          },
+          {
+            path: '/products/categories',
+            name: 'Manage Categories',
+            component: () =>
+              import('@/views/management/products/Categories.vue'),
+          },
+        ],
+      },
+      {
+        path: '/users',
+        name: 'Users',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/users/customers',
+        children: [
+          {
+            path: '/users/customers',
+            name: 'List Customers',
+            component: () => import('@/views/management/users/UsersList.vue'),
+          },
+          {
+            path: '/products/create',
+            name: 'Create new product',
+            component: () =>
+              import('@/views/management/products/CreateProduct.vue'),
+          },
+          {
+            path: '/products/:id',
+            name: 'Edit Product',
+            component: () =>
+              import('@/views/management/products/EditProduct.vue'),
+          },
+          {
+            path: '/products/categories',
+            name: 'Manage Categories',
+            component: () =>
+              import('@/views/management/products/Categories.vue'),
+          },
+        ],
+      },
+      {
+        path: '/promotions',
+        name: 'Promotions',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/promotions/list',
+        children: [
+          {
+            path: '/promotions/list',
+            name: 'List Promotions',
+            component: () =>
+              import('@/views/management/promotions/PromotionsList.vue'),
+          },
+          {
+            path: '/products/create',
+            name: 'Create new product',
+            component: () =>
+              import('@/views/management/products/CreateProduct.vue'),
+          },
+          {
+            path: '/products/:id',
+            name: 'Edit Product',
+            component: () =>
+              import('@/views/management/products/EditProduct.vue'),
+          },
+          {
+            path: '/products/categories',
+            name: 'Manage Categories',
+            component: () =>
+              import('@/views/management/products/Categories.vue'),
           },
         ],
       },
@@ -299,6 +393,16 @@ const router = createRouter({
     // always scroll to top
     return { top: 0 }
   },
+})
+
+router.beforeEach((to, from, next) => {
+  // chuyển đến trang login nếu chưa được login
+  // const publicPages = ['pages/login', 'pages/register']
+  // const authRequired = !publicPages.includes(to.path)
+  const loggedIn = localStorage.getItem('isAuthenticated')
+  if (to.name !== 'Login' && to.name !== 'Register' && !loggedIn) {
+    return next({ name: 'Login' })
+  } else next()
 })
 
 export default router

@@ -91,7 +91,7 @@
 import { CChartLine, CChartDoughnut } from '@coreui/vue-chartjs'
 import faker from 'faker'
 import { getOrders, getOrdersByFilter } from '../../../api/oders'
-import { getProducts } from '../../../api/products'
+import { getProducts } from '../../../api/products/api-sp17'
 import {
   unique,
   sumSimpleArray,
