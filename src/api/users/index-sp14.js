@@ -17,12 +17,16 @@ export async function login_14(username, password) {
 
 export async function getListUsers_14() {
   try {
-    const token = localStorage.getItem('item')
-    const res = await axiosInstance.get('user/', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const res = await axiosInstance.get('users/active')
+    return res.data
+  } catch (error) {
+    return error
+  }
+}
+
+export async function deleteUser_14(id) {
+  try {
+    const res = await axiosInstance.delete('user/' + id)
     return res.data
   } catch (error) {
     return error
