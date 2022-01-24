@@ -14,6 +14,7 @@
     style="width: 100%"
     v-loading="loading"
     stripe
+    height="800"
   >
     <el-table-column prop="id" label="User's ID" width="85"> </el-table-column>
     <el-table-column prop="gender" label="Gender" width="90"> </el-table-column>
@@ -49,9 +50,13 @@
         <el-input v-model="search" size="mini" placeholder="Type to search" />
       </template>
       <template v-slot="scope">
-        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-          >Detail</el-button
-        >
+        <el-button size="mini">
+          <router-link
+            :to="{ name: 'Customer information', params: { id: scope.row.id } }"
+          >
+            Detail
+          </router-link>
+        </el-button>
         <el-button
           size="mini"
           type="danger"
