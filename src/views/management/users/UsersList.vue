@@ -16,7 +16,7 @@
     stripe
     height="800"
   >
-    <el-table-column prop="id" label="User's ID" width="85"> </el-table-column>
+    <el-table-column prop="id" label="User's ID" width="85"></el-table-column>
     <el-table-column prop="gender" label="Gender" width="90"> </el-table-column>
     <el-table-column prop="name" label="User's Name" min-width="180">
     </el-table-column>
@@ -80,6 +80,7 @@ export default {
   async created() {
     this.loading = true
     this.users = (await getListUsers()).data.filter((e) => e.role == 'user')
+    console.log(this.users)
     this.loading = false
   },
   methods: {

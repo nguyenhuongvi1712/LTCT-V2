@@ -140,19 +140,23 @@ export default {
     },
     async handlerOnSubmit() {
       this.loading = true
-      await updateUser(this.user.id, {
+      const res = await updateUser(this.user.id, {
         name: this.uname,
         gender: this.gender,
         address: this.address,
         phone: this.phone,
         email: this.email,
       })
-      this.user = await getAccountInfo(this.user.id)
-      this.setValue()
-      this.$message({
-        message: 'Account updated successfully!',
-        type: 'success',
-      })
+      if (res.success === true) {
+        this.user = await getAccountInfo(this.user.id)
+        this.setValue()
+        this.$message({
+          message: 'Account updated successfully!',
+          type: 'success',
+        })
+      } else {
+        this.$message.error('Oops! Something was wrong!')
+      }
       this.loading = false
     },
   },
