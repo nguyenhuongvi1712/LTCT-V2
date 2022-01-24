@@ -263,10 +263,9 @@ const routes = [
             component: () => import('@/views/management/users/UsersList.vue'),
           },
           {
-            path: '/products/create',
-            name: 'Create new product',
-            component: () =>
-              import('@/views/management/products/CreateProduct.vue'),
+            path: '/users/:id',
+            name: 'Customer information',
+            component: () => import('@/views/management/users/Customer.vue'),
           },
           {
             path: '/products/:id',
@@ -298,23 +297,25 @@ const routes = [
             component: () =>
               import('@/views/management/promotions/PromotionsList.vue'),
           },
-          {
-            path: '/products/create',
-            name: 'Create new product',
-            component: () =>
-              import('@/views/management/products/CreateProduct.vue'),
+        ],
+      },
+      {
+        path: '/advertisements',
+        name: 'Advertisements',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
           },
+        },
+        redirect: '/advertisements/list',
+        children: [
           {
-            path: '/products/:id',
-            name: 'Edit Product',
+            path: '/advertisements/list',
+            name: 'List Advertisements',
             component: () =>
-              import('@/views/management/products/EditProduct.vue'),
-          },
-          {
-            path: '/products/categories',
-            name: 'Manage Categories',
-            component: () =>
-              import('@/views/management/products/Categories.vue'),
+              import(
+                '@/views/management/advertisements/AdvertisementsList.vue'
+              ),
           },
         ],
       },

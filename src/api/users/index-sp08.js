@@ -1,12 +1,12 @@
 import axios from 'axios'
 const axiosInstance = axios.create({
-  baseURL: 'https://module-user-ltct.herokuapp.com/api',
+  baseURL: 'https://ltct-api.herokuapp.com/api/ltct',
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-export async function login_14(username, password) {
+export async function login_08(username, password) {
   try {
     const res = await axiosInstance.post('/login', { username, password })
     return res.data
@@ -15,9 +15,9 @@ export async function login_14(username, password) {
   }
 }
 
-export async function getListUsers_14() {
+export async function getListUsers_08() {
   try {
-    const res = await axiosInstance.get('users/active')
+    const res = await axiosInstance.get('admin/all')
     return res.data
   } catch (error) {
     return error
@@ -36,15 +36,6 @@ export async function deleteUser_14(id) {
 export async function getAccountById_14(id) {
   try {
     const res = await axiosInstance.get('user/' + id)
-    return res.data
-  } catch (error) {
-    return error
-  }
-}
-
-export async function updateAccount_14(id, data) {
-  try {
-    const res = await axiosInstance.put('/user/' + id, data)
     return res.data
   } catch (error) {
     return error

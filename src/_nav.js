@@ -100,6 +100,24 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavGroup',
+    name: 'Advertisements',
+    to: '/advertisements',
+    icon: 'cil-star',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'List Advertisements',
+        to: '/advertisements/list',
+      },
+      {
+        component: 'CNavItem',
+        name: 'Create new advertisement',
+        to: '/advertisements/create',
+      },
+    ],
+  },
   // {
   //   component: 'CNavGroup',
   //   name: 'Store',
