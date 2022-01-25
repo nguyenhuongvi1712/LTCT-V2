@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading">
-    <h2 class="text-center mb-4">Customer new account</h2>
+    <h2 class="text-center mb-4">Create new account</h2>
     <CCard class="mb-4">
       <CCardBody>
         <CRow class="mb-3">
@@ -80,6 +80,53 @@
           </div>
         </CRow>
         <CRow class="mb-3">
+          <CFormLabel for="inputPassword" class="col-sm-2 col-form-label">
+            Password
+          </CFormLabel>
+          <div class="col-sm-10" :class="{ error: v$.password.$errors.length }">
+            <CFormInput
+              type="password"
+              id="inputPassword"
+              v-model="v$.password.$model"
+            />
+            <div
+              class="input-errors"
+              v-for="error of v$.password.$errors"
+              :key="error.$uid"
+            >
+              <div class="error-msg text-danger">
+                {{ error.$message }}
+              </div>
+            </div>
+          </div>
+        </CRow>
+        <CRow class="mb-3">
+          <CFormLabel for="inputPassword" class="col-sm-2 col-form-label">
+            Repeat password
+          </CFormLabel>
+          <div
+            class="col-sm-10"
+            :class="{ error: v$.repeatPassword.$errors.length }"
+          >
+            <CFormInput type="password" v-model="v$.repeatPassword.$model" />
+            <div
+              class="error text-danger"
+              v-if="repeatPassword !== '' && repeatPassword !== password"
+            >
+              Passwords must be identical.
+            </div>
+            <div
+              class="input-errors"
+              v-for="error of v$.repeatPassword.$errors"
+              :key="error.$uid"
+            >
+              <div class="error-msg text-danger">
+                {{ error.$message }}
+              </div>
+            </div>
+          </div>
+        </CRow>
+        <CRow class="mb-3">
           <CFormLabel for="email" class="col-sm-2 col-form-label">
             Email
           </CFormLabel>
@@ -133,9 +180,9 @@
   </div>
 </template>
 <script>
-import { updateUser } from '@/api/users'
+import { createNewAccount } from '@/api/users'
 import useVuelidate from '@vuelidate/core'
-import { required, email, numeric } from '@vuelidate/validators'
+import { required, email, numeric, minLength } from '@vuelidate/validators'
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -147,6 +194,13 @@ export default {
       uname: { required },
       username: { required },
       role: { required },
+      password: {
+        required,
+        minLength: minLength(6),
+      },
+      repeatPassword: {
+        required,
+      },
     }
   },
   data() {
@@ -170,34 +224,37 @@ export default {
           label: 'Admin',
         },
         {
-          value: 'administrator',
-          label: 'Administrator',
-        },
-        {
           value: 'shipper',
           label: 'Shipper',
         },
       ],
       role: '',
+      password: '',
+      repeatPassword: '',
     }
   },
   methods: {
     async handlerOnSubmit() {
       const isValid = await this.v$.$validate()
-      if (!isValid) return
+      if (!isValid || this.repeatPassword !== this.password) return
       this.loading = true
-      const res = await updateUser(this.user.id, {
+      const res = await createNewAccount({
         name: this.uname,
+        username: this.username,
         gender: this.gender,
         address: this.address,
         phone: this.phone,
         email: this.email,
+        password: this.password,
+        rePassword: this.repeatPassword,
+        role: this.role,
       })
       if (res.success === true) {
         this.$message({
-          message: 'Account updated successfully!',
+          message: 'Account created successfully!',
           type: 'success',
         })
+        this.$router.push('/users/customers')
       } else {
         this.$message.error('Oops! Something was wrong!')
       }

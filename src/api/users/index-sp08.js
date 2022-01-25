@@ -90,3 +90,18 @@ export async function activeUser_08(id) {
     }
   }
 }
+
+export async function createNewAccount_08(account) {
+  try {
+    const res = await axiosInstance.post('admin/register', account)
+    return {
+      success: true,
+      ...res.data,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      ...error,
+    }
+  }
+}
