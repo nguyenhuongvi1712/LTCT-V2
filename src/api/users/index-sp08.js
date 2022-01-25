@@ -60,3 +60,33 @@ export async function updateAccount_08(id, data) {
     }
   }
 }
+
+export async function blockUser_08(id) {
+  try {
+    const res = await axiosInstance.put('admin/blocked?id=' + id)
+    return {
+      success: true,
+      ...res.data,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      ...error,
+    }
+  }
+}
+
+export async function activeUser_08(id) {
+  try {
+    const res = await axiosInstance.put('admin/active?id=' + id)
+    return {
+      success: true,
+      ...res.data,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      ...error,
+    }
+  }
+}

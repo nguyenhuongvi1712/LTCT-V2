@@ -12,6 +12,8 @@ import {
   deleteUser_08,
   getAccountById_08,
   updateAccount_08,
+  blockUser_08,
+  activeUser_08,
 } from './index-sp08'
 
 async function getModule() {
@@ -74,5 +76,23 @@ export async function updateUser(id, data) {
     return await updateAccount_14(id, data)
   } else {
     return await updateAccount_08(id, data)
+  }
+}
+
+export async function blockUser(id) {
+  const res = await getModule()
+  if (res === 14) {
+    return
+  } else {
+    return await blockUser_08(id)
+  }
+}
+
+export async function activeUser(id) {
+  const res = await getModule()
+  if (res === 14) {
+    return
+  } else {
+    return await activeUser_08(id)
   }
 }
