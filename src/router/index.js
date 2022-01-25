@@ -263,6 +263,12 @@ const routes = [
             component: () => import('@/views/management/users/UsersList.vue'),
           },
           {
+            path: '/users/create',
+            name: 'Create new account',
+            component: () =>
+              import('@/views/management/users/CreateNewAccount.vue'),
+          },
+          {
             path: '/users/:id',
             name: 'Customer information',
             component: () => import('@/views/management/users/Customer.vue'),

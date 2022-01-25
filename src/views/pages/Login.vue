@@ -129,6 +129,7 @@ export default {
       } else {
         this.loading = true
         const res = await login(this.username, this.password)
+        console.log('res', res)
         this.loading = false
         if (res.status === 200) {
           const user = res.data

@@ -45,8 +45,14 @@ export async function getAccountById_14(id) {
 export async function updateAccount_14(id, data) {
   try {
     const res = await axiosInstance.put('/user/' + id, data)
-    return res.data
+    return {
+      success: true,
+      ...res.data,
+    }
   } catch (error) {
-    return error
+    return {
+      success: false,
+      ...error,
+    }
   }
 }
