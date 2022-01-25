@@ -11,6 +11,23 @@ export default [
   },
   {
     component: 'CNavTitle',
+    name: 'Notification',
+  },
+  {
+    component: 'CNavGroup',
+    name: 'Orders',
+    to: '/orders',
+    icon: 'cil-bell',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'List Orders',
+        to: '/orders/list',
+      },
+    ],
+  },
+  {
+    component: 'CNavTitle',
     name: 'Report',
   },
   {
@@ -74,6 +91,11 @@ export default [
         component: 'CNavItem',
         name: 'Customers',
         to: '/users/customers',
+      },
+      {
+        component: 'CNavItem',
+        name: 'Accounts',
+        to: '/users/accounts',
       },
       {
         component: 'CNavItem',

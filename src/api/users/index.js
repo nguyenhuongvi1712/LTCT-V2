@@ -14,6 +14,7 @@ import {
   updateAccount_08,
   blockUser_08,
   activeUser_08,
+  createNewAccount_08,
 } from './index-sp08'
 
 async function getModule() {
@@ -94,5 +95,14 @@ export async function activeUser(id) {
     return
   } else {
     return await activeUser_08(id)
+  }
+}
+
+export async function createNewAccount(account) {
+  const res = await getModule()
+  if (res === 14) {
+    return
+  } else {
+    return await createNewAccount_08(account)
   }
 }
