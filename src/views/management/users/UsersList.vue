@@ -27,14 +27,14 @@
     <el-table-column prop="phone" label="Phone number" min-width="140">
     </el-table-column>
     <el-table-column
-      prop="tag"
-      label="Tag"
+      prop="status"
+      label="Status"
       width="100"
       :filters="[
         { text: 'Active', value: 'active' },
         { text: 'Blocked', value: 'blocked' },
       ]"
-      :filter-method="filterTag"
+      :filter-method="filterStatus"
       filter-placement="bottom-end"
     >
       <template v-slot="scope">
@@ -110,6 +110,9 @@ export default {
           console.log(err)
           return
         })
+    },
+    filterStatus(value, row) {
+      return row.status === value
     },
   },
 }

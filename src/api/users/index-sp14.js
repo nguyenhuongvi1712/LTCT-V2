@@ -1,6 +1,6 @@
 import axios from 'axios'
 const axiosInstance = axios.create({
-  baseURL: 'https://module-user-ltct.herokuapp.com/api',
+  baseURL: 'https://ltct-customer.herokuapp.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -45,6 +45,36 @@ export async function getAccountById_14(id) {
 export async function updateAccount_14(id, data) {
   try {
     const res = await axiosInstance.put('/user/' + id, data)
+    return {
+      success: true,
+      ...res.data,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      ...error,
+    }
+  }
+}
+
+export async function blockUser_14(id) {
+  try {
+    const res = await axiosInstance.put(`user/${id}/block`)
+    return {
+      success: true,
+      ...res.data,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      ...error,
+    }
+  }
+}
+
+export async function activeUser_14(id) {
+  try {
+    const res = await axiosInstance.get(`user/${id}/active`)
     return {
       success: true,
       ...res.data,

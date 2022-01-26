@@ -254,7 +254,7 @@ export default {
           message: 'Account created successfully!',
           type: 'success',
         })
-        this.$router.push('/users/customers')
+        this.$router.push('/users/accounts')
       } else {
         this.$message.error('Oops! Something was wrong!')
       }

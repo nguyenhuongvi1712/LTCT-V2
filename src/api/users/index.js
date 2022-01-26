@@ -4,6 +4,8 @@ import {
   deleteUser_14,
   getAccountById_14,
   updateAccount_14,
+  blockUser_14,
+  activeUser_14,
 } from './index-sp14'
 
 import {
@@ -18,7 +20,7 @@ import {
 } from './index-sp08'
 
 async function getModule() {
-  return 8
+  return 14
 }
 
 export async function login(username, password) {
@@ -83,7 +85,7 @@ export async function updateUser(id, data) {
 export async function blockUser(id) {
   const res = await getModule()
   if (res === 14) {
-    return
+    return await blockUser_14(id)
   } else {
     return await blockUser_08(id)
   }
@@ -92,7 +94,7 @@ export async function blockUser(id) {
 export async function activeUser(id) {
   const res = await getModule()
   if (res === 14) {
-    return
+    return await activeUser_14(id)
   } else {
     return await activeUser_08(id)
   }
