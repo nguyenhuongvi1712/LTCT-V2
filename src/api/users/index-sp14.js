@@ -17,7 +17,7 @@ export async function login_14(username, password) {
 
 export async function getListUsers_14() {
   try {
-    const res = await axiosInstance.get('users/active')
+    const res = await axiosInstance.get('/user')
     return res.data
   } catch (error) {
     return error
@@ -59,7 +59,7 @@ export async function updateAccount_14(id, data) {
 
 export async function blockUser_14(id) {
   try {
-    const res = await axiosInstance.put(`user/${id}/block`)
+    const res = await axiosInstance.get(`user/${id}/block`)
     return {
       success: true,
       ...res.data,
@@ -75,6 +75,28 @@ export async function blockUser_14(id) {
 export async function activeUser_14(id) {
   try {
     const res = await axiosInstance.get(`user/${id}/active`)
+    return {
+      success: true,
+      ...res.data,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      ...error,
+    }
+  }
+}
+
+export async function createNewAccount_14(account) {
+  try {
+    const res = await axiosInstance.post('/register', {
+      username: account.username,
+      password: account.password,
+      password_confirmation: account.password_confirmation,
+      email: account.email,
+      phone: account.phone,
+      role: account.role,
+    })
     return {
       success: true,
       ...res.data,

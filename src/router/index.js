@@ -184,6 +184,24 @@ const routes = [
         ],
       },
       {
+        path: '/after-sales',
+        name: 'After-sales service',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/after-sales/feedbacks/list',
+        children: [
+          {
+            path: '/after-sales/feedbacks/list',
+            name: 'List Feedbacks',
+            component: () =>
+              import('@/views/management/afterSales/ListFeedbacks.vue'),
+          },
+        ],
+      },
+      {
         path: '/widgets',
         name: 'Widgets',
         component: () => import('@/views/widgets/Widgets.vue'),

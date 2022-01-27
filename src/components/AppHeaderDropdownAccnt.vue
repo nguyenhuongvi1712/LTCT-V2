@@ -19,7 +19,7 @@
         <CIcon icon="cil-task" /> Tasks
         <CBadge color="danger" class="ms-auto">{{ itemsCount }}</CBadge>
       </CDropdownItem> -->
-      <CDropdownItem>
+      <CDropdownItem @click="handleFeedbacks">
         <CIcon icon="cil-comment-square" /> Feedbacks
         <CBadge color="warning" class="ms-auto">{{ itemsCount }}</CBadge>
       </CDropdownItem>
@@ -61,6 +61,9 @@ export default {
     logout() {
       this.$store.commit('authStore/logout')
       this.$router.replace({ name: 'Login' })
+    },
+    handleFeedbacks() {
+      this.$router.push({ name: 'List Feedbacks' })
     },
   },
 }

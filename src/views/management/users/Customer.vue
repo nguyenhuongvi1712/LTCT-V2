@@ -126,7 +126,7 @@ export default {
       phone: '',
       email: '',
       address: '',
-      u_status: null,
+      u_status: '',
     }
   },
   methods: {
@@ -137,7 +137,7 @@ export default {
         this.email = this.user.email
         this.address = this.user.address
         this.gender = this.user.gender
-        this.u_status = this.user.status === 'active' ? true : false
+        // this.u_status = this.user.status === 'active' ? true : false
       }
     },
     async handlerOnSubmit() {
@@ -165,13 +165,14 @@ export default {
       this.loading = true
       try {
         var res
-        if (this.u_status === true) {
-          res = await activeUser(this.user.id)
+        if (this.u_status === '') return
+        else if (this.u_status === true) {
+          res = await activeUser(this.$route.params.id)
         } else {
-          res = await blockUser(this.user.id)
+          res = await blockUser(this.$route.params.id)
         }
         if (res.success === true) {
-          this.user = await getAccountInfo(this.user.id)
+          this.user = await getAccountInfo(this.$route.params.id)
           this.setValue()
         } else {
           this.$message.error('Oops! Something was wrong!')

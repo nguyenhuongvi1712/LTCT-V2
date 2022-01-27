@@ -247,6 +247,7 @@ export default {
         email: this.email,
         password: this.password,
         rePassword: this.repeatPassword,
+        password_confirmation: this.repeatPassword,
         role: this.role,
       })
       if (res.success === true) {
