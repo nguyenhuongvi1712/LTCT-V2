@@ -45,6 +45,16 @@ export default {
     return {
       newOrder: [],
       search: '',
+      filterStatus: [
+        {
+          value: 'unpaid',
+          text: 'unpaid',
+        },
+        {
+          value: 'active',
+          text: 'active',
+        },
+      ],
     }
   },
   async created() {
