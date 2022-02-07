@@ -8,6 +8,7 @@
       )
     "
     style="width: 100%"
+    v-loading="loading"
   >
     <el-table-column label="id" prop="id"> </el-table-column>
     <el-table-column label="Product id" prop="product_id"> </el-table-column>
@@ -41,6 +42,7 @@ export default {
     return {
       tableData: [],
       search: '',
+      loading: false,
     }
   },
   methods: {
@@ -52,8 +54,10 @@ export default {
     },
   },
   async created() {
+    this.loading = true
     const res = await getBill()
     this.tableData = res
+    this.loading = false
   },
 }
 </script>

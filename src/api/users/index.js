@@ -21,7 +21,7 @@ import {
 } from './index-sp08'
 
 async function getModule() {
-  return 14
+  return 8
 }
 
 export async function login(username, password) {

@@ -133,7 +133,7 @@ export default {
         this.loading = false
         if (res.status === 200) {
           const user = res.data
-          if (user.role === 'admin') {
+          if (user.role === 'admin' || user.role === 'shipper') {
             this.$store.commit('authStore/login', {
               user,
               token: res.token,

@@ -163,6 +163,18 @@ const routes = [
                 '@/views/management/advertisements/AdvertisementsList.vue'
               ),
           },
+          {
+            path: '/advertisements/create',
+            name: 'Create Advertisement',
+            component: () =>
+              import('@/views/management/advertisements/CreateAd.vue'),
+          },
+          {
+            path: '/advertisements/:id',
+            name: 'Advertisement information',
+            component: () =>
+              import('@/views/management/advertisements/EditAd.vue'),
+          },
         ],
       },
       {
@@ -180,6 +192,12 @@ const routes = [
             name: 'List Orders',
             component: () =>
               import('@/views/notification/orders/ListOrders.vue'),
+          },
+          {
+            path: '/orders/new',
+            name: 'New Orders',
+            component: () =>
+              import('@/views/notification/orders/ListAvailableOrders.vue'),
           },
         ],
       },

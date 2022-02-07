@@ -1,84 +1,26 @@
 <template>
   <div>
-    <h2 class="text-center mb-4">Manage Orders</h2>
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column type="expand">
-        <template v-slot="props">
-          <p>State: {{ props.row.state }}</p>
-          <p>City: {{ props.row.city }}</p>
-          <p>Address: {{ props.row.address }}</p>
-          <p>Zip: {{ props.row.zip }}</p>
-        </template>
-      </el-table-column>
-      <el-table-column label="Date" prop="date"> </el-table-column>
-      <el-table-column label="Name" prop="name"></el-table-column>
-    </el-table>
+    <CRow>
+      <CCol :md="12">
+        <CCard class="mb-4">
+          <CCardHeader>New Orders</CCardHeader>
+          <CCardBody>Test</CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
   </div>
 </template>
 <script>
+import { getOrder } from '../../../api/orders'
 export default {
   data() {
     return {
-      tableData: [
-        {
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-        },
-        {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-        },
-        {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-        },
-        {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-        },
-        {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-        },
-        {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-        },
-        {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address:
-            'No. 189, Grove St, Los Angelesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-          zip: 'CA 90036',
-        },
-      ],
+      newOrder: [],
     }
+  },
+  async created() {
+    const res = await getOrder()
+    console.log('res', res)
   },
 }
 </script>
