@@ -199,6 +199,12 @@ const routes = [
             component: () =>
               import('@/views/notification/orders/ListAvailableOrders.vue'),
           },
+          {
+            path: '/orders/list-order',
+            name: 'My Orders',
+            component: () =>
+              import('@/views/notification/orders/ListOrdersOfShipper.vue'),
+          },
         ],
       },
       {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-center mb-4">List new orders</h2>
+    <h2 class="text-center mb-4">My Delivery</h2>
     <el-table
       :data="
         tableData.filter(
@@ -20,14 +20,14 @@
       <el-table-column label="Cost" prop="cost"> </el-table-column>
       <el-table-column label="ShippingFee" prop="shippingFee">
       </el-table-column>
-
+      <el-table-column label="Status" prop="status"> </el-table-column>
       <el-table-column align="right">
         <template v-slot:header>
           <el-input v-model="search" size="mini" placeholder="Type to search" />
         </template>
         <template v-slot="scope">
           <el-button size="mini" @click="takeConfirm(scope.$index, scope.row)"
-            >Take delivery</el-button
+            >Update status</el-button
           >
         </template>
       </el-table-column>
@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-import { getAvailableDelivery, takeDelivery } from '../../../api/shipping'
+import { getDeliveryByShipperId, updateStatus } from '../../../api/shipping'
 export default {
   data() {
     return {
@@ -43,12 +43,6 @@ export default {
       search: '',
       loading: false,
     }
-  },
-  async created() {
-    this.loading = true
-    const res = (await getAvailableDelivery()).deliveries
-    this.tableData = res
-    this.loading = false
   },
   methods: {
     takeConfirm(index, row) {
@@ -59,17 +53,13 @@ export default {
       })
         .then(async () => {
           this.loading = true
-          var user = JSON.parse(localStorage.getItem('user'))
-          if (!user.id) {
-            user = { ...user, id: user._id }
-          }
-          await takeDelivery(user.id, row.deliveryId)
+          await updateStatus(row.deliveryId)
           this.loading = false
           this.$message({
             type: 'success',
             message: 'Completed',
           })
-          this.$router.push('/orders/list-order')
+          await this.getData()
         })
         .catch((err) => {
           this.$message.error('Oops! Something was wrong!')
@@ -77,6 +67,18 @@ export default {
           return
         })
     },
+    async getData() {
+      this.loading = true
+      var user = JSON.parse(localStorage.getItem('user'))
+      if (!user.id) {
+        user = { ...user, id: user._id }
+      }
+      this.tableData = (await getDeliveryByShipperId(user.id)).deliveries
+      this.loading = false
+    },
+  },
+  async created() {
+    await this.getData()
   },
 }
 </script>

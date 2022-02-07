@@ -1,14 +1,14 @@
 import axios from 'axios'
 const axiosInstance = axios.create({
-  baseURL: 'https://binhnguyen-tech.stackstaging.com/OrderModule/order',
+  baseURL: 'https://binhnguyen-tech.stackstaging.com/OrderModule/',
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
 axiosInstance.interceptors.request.use((config) => {
-  const accessToken = 'test'
-  config.headers['x-api-key'] = `Bearer ${accessToken}`
+  //   const accessToken = 'test'
+  //   config.headers['x-api-key'] = `Bearer ${accessToken}`
   return config
 })
 
