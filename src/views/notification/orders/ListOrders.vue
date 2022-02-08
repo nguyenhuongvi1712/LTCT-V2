@@ -71,7 +71,9 @@
             >
               <el-table-column label="Id" prop="order_id">
                 <template v-slot="scope">
-                  <router-link to="/">{{ scope.row.order_id }}</router-link>
+                  <router-link :to="'/orders/' + scope.row.order_id">{{
+                    scope.row.order_id
+                  }}</router-link>
                 </template>
               </el-table-column>
               <el-table-column label="Custormer Id" prop="user_id">
