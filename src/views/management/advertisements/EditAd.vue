@@ -208,7 +208,6 @@ export default {
   async created() {
     this.id = this.$route.params.id
     const res = (await getAdvertismentById(this.id)).data
-    console.log('res', res)
     this.title = res.title
     this.type = res.type
     this.url = res.advertismentUrl

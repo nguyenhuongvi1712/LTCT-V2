@@ -31,7 +31,11 @@ export async function getOrdersByFilter(start_par, end_par) {
     })
   } else return orders
 }
-import { getOrders_SP1 } from './orders-sp1'
+import {
+  getOrders_SP1,
+  getOrdersById_SP01,
+  updateStatus_SP01,
+} from './orders-sp1'
 
 async function getModule() {
   return 1
@@ -42,4 +46,16 @@ export async function getOrder() {
   if (res === 1) {
     return await getOrders_SP1()
   }
+}
+export async function getOrderById(id) {
+  const res = await getModule()
+  if (res === 1) {
+    return await getOrdersById_SP01(id)
+  } else return
+}
+export async function updateStatus(id, status) {
+  const res = await getModule()
+  if (res === 1) {
+    return await updateStatus_SP01(id, status)
+  } else return
 }

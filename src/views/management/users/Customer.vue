@@ -16,7 +16,7 @@
               id="username"
               readonly
               plain-text
-              :value="user.username"
+              :value="user?.username"
             />
           </div>
         </CRow>
@@ -184,7 +184,7 @@ export default {
       this.loading = false
     },
   },
-  async created() {
+  async mounted() {
     try {
       this.loading = true
       const id = this.$route.params.id

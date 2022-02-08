@@ -205,6 +205,12 @@ const routes = [
             component: () =>
               import('@/views/notification/orders/ListOrdersOfShipper.vue'),
           },
+          {
+            path: '/orders/:id',
+            name: 'Order detail',
+            component: () =>
+              import('@/views/notification/orders/OrderDetail.vue'),
+          },
         ],
       },
       {
