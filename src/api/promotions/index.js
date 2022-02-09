@@ -1,7 +1,7 @@
 import axios from 'axios'
 import promotions from '@/mock/promotion'
 const axiosInstance = axios.create({
-  baseURL: 'https://ltct-sp19-api.herokuapp.com/api/sale/',
+  baseURL: 'https://ltct-sp19-api.herokuapp.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -19,5 +19,32 @@ export async function getListPromotions() {
     return res.data
   } catch (error) {
     return error
+  }
+}
+
+export async function getListPromotion() {
+  try {
+    const res = await axiosInstance.get('/sale/promotion/admin/')
+    return res.data
+  } catch (error) {
+    return error
+  }
+}
+
+export async function deletePromotion(id) {
+  try {
+    const data = { promotionIds: [id] }
+    const res = await axiosInstance.delete('sale/promotion/admin/destroy', {
+      data: data,
+    })
+    return {
+      ...res.data,
+      success: true,
+    }
+  } catch (error) {
+    return {
+      ...error,
+      success: false,
+    }
   }
 }
