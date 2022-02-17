@@ -25,6 +25,16 @@ const routes = [
         redirect: '/report/advertisment',
       },
       {
+        path: '/courses/',
+        name: 'Courses',
+        redirect: '/courses/my-courses',
+      },
+      {
+        path: '/courses/my-courses',
+        name: 'My-Course',
+        component: () => import('@/views/course/MyListCourse'),
+      },
+      {
         path: '/report/advertisment',
         name: 'Advertisment',
         component: () =>

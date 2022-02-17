@@ -13,12 +13,12 @@
         </CNavItem>
       </CHeaderNav>
       <CHeaderNav>
-        <!-- <CNavItem>
-          <CNavLink href="#">
-            <CIcon class="mx-2" icon="cil-bell" size="lg" />
-          </CNavLink>
-        </CNavItem>
+        <AppHeaderDropdownAccnt />
+
         <CNavItem>
+          Xin chào <strong>{{ user.username }}</strong> !
+        </CNavItem>
+        <!-- <CNavItem>
           <CNavLink href="#">
             <CIcon class="mx-2" icon="cil-list" size="lg" />
           </CNavLink>
@@ -28,7 +28,6 @@
             <CIcon class="mx-2" icon="cil-envelope-open" size="lg" />
           </CNavLink>
         </CNavItem> -->
-        <AppHeaderDropdownAccnt />
       </CHeaderNav>
     </CContainer>
     <CHeaderDivider />
@@ -42,6 +41,8 @@
 import AppBreadcrumb from './AppBreadcrumb'
 import AppHeaderDropdownAccnt from './AppHeaderDropdownAccnt'
 import { logo } from '@/assets/brand/logo'
+var user = JSON.parse(localStorage.getItem('user'))
+
 export default {
   name: 'AppHeader',
   components: {
@@ -51,6 +52,11 @@ export default {
   setup() {
     return {
       logo,
+    }
+  },
+  data() {
+    return {
+      user: user,
     }
   },
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <WidgetsStatsA />
+    <ListCourse />
+    <!-- <WidgetsStatsA />
     <CRow>
       <CCol :md="12">
         <CCard class="mb-4">
@@ -264,7 +265,7 @@
           </CCardBody>
         </CCard>
       </CCol>
-    </CRow>
+    </CRow> -->
   </div>
 </template>
 
@@ -275,16 +276,18 @@ import avatar3 from '@/assets/images/avatars/3.jpg'
 import avatar4 from '@/assets/images/avatars/4.jpg'
 import avatar5 from '@/assets/images/avatars/5.jpg'
 import avatar6 from '@/assets/images/avatars/6.jpg'
-import MainChartExample from './charts/MainChartExample'
-import WidgetsStatsA from './widgets/WidgetsStatsTypeA.vue'
-import WidgetsStatsD from './widgets/WidgetsStatsTypeD.vue'
+// import MainChartExample from './charts/MainChartExample'
+// import WidgetsStatsA from './widgets/WidgetsStatsTypeA.vue'
+// import WidgetsStatsD from './widgets/WidgetsStatsTypeD.vue'
+import ListCourse from '../views/course/ListCourse.vue'
 
 export default {
   name: 'Dashboard',
   components: {
-    MainChartExample,
-    WidgetsStatsA,
-    WidgetsStatsD,
+    // MainChartExample,
+    // WidgetsStatsA,
+    // WidgetsStatsD,
+    ListCourse,
   },
   setup() {
     const progressGroupExample1 = [

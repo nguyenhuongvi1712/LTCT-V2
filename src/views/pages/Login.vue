@@ -102,7 +102,7 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
-import { login } from '@/api/users'
+import { login } from '@/api/auth'
 export default {
   name: 'Login',
   setup() {
@@ -131,12 +131,14 @@ export default {
         const res = await login(this.username, this.password)
         console.log('res', res)
         this.loading = false
-        if (res.status === 200) {
-          const user = res.data
+        if (res.success === true) {
+          const user = {
+            username: this.username,
+            role: 'admin',
+          }
           if (user.role === 'admin' || user.role === 'shipper') {
             this.$store.commit('authStore/login', {
               user,
-              token: res.token,
             })
             this.$router.replace({ path: '/' })
           } else {

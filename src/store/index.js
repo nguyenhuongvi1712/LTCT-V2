@@ -22,14 +22,12 @@ const authStore = {
       localStorage.removeItem('user')
     },
     login(state, req) {
-      const { user, token } = req
+      const { user } = req
       if (user.role === 'admin' || user.role === 'shipper') {
         state.isAuthenticated = true
         state.user = { ...user }
-        state.token = token
         localStorage.setItem('isAuthenticated', true)
         localStorage.setItem('user', JSON.stringify(user))
-        localStorage.setItem('token', token)
       }
     },
   },
